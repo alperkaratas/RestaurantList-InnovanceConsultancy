@@ -9,7 +9,7 @@ const Register = props => {
         <Image
           style={styles.image}
           source={require('../assets/register.png')}
-        />
+        /> 
       </View>
       <View style={styles.inputContainer}>
         <Text style={styles.loginText}>Kaydol ve keşfetmeye başla!</Text>
