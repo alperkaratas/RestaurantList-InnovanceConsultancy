@@ -2,15 +2,15 @@ import React, {useState} from 'react';
 import {View, StyleSheet, TextInput, Dimensions} from 'react-native';
 
 const CustomInput = props => {
-  const [text, onChangeText] = useState('');
   return (
     <View style={styles.inputContainer}>
       <TextInput
-        onChangeText={onChangeText}
-        value={text}
+        onChangeText={props.onChangeText}
+        value={props.value}
         placeholder={props.placeHolder}
         keyboardType={props.keyboardType}
         autoCapitalize={props.autoCapitalize}
+        secureTextEntry={props.secureTextEntry}
       />
     </View>
   );

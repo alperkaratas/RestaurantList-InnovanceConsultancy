@@ -1,10 +1,55 @@
-import React from 'react';
-import {SafeAreaView, View, Text, StyleSheet, Image} from 'react-native';
+import React, {useState} from 'react';
+import {
+  SafeAreaView,
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  ActivityIndicator,
+  Alert,
+} from 'react-native';
 import {CustomInput, CustomButton} from '../components';
+import axios from 'axios';
 
 const Login = props => {
+  const [username, setUserName] = useState('');
+  const [pass, setPass] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const onSubmit = async () => {
+    await axios
+      .post('https://foodbukka.herokuapp.com/api/v1/auth/login', {
+        username: username,
+        password: pass,
+      })
+      .then(res => {
+        setLoading(true);
+        console.log(res);
+        if (res.data.status) {
+          setTimeout(() => {
+            setLoading(false);
+          }, 2500);
+          setTimeout(() => {
+            props.navigation.navigate('Tabs');
+          }, 2510);
+        }
+      });
+  };
+
   return (
     <SafeAreaView style={styles.container}>
+      {loading ? (
+        <View
+          style={{
+            flex: 1,
+            justifyContent: 'center',
+            alignSelf: 'center',
+            zIndex: 2,
+          }}>
+          <ActivityIndicator color="blue" size="large" />
+        </View>
+      ) : null}
+
       <View>
         <View style={styles.imageContainer}>
           <Image
@@ -17,16 +62,22 @@ const Login = props => {
         </View>
         <View style={styles.inputContainer}>
           <CustomInput
-            keyboardType={'email-address'}
-            placeHolder={'E-posta adresi'}
+            value={username}
+            onChangeText={setUserName}
+            keyboardType={'default'}
+            placeHolder={'Kullanıcı adı'}
             autoCapitalize="none"
+            secureTextEntry={false}
           />
           <CustomInput
+            value={pass}
+            onChangeText={setPass}
             keyboardType={'default'}
             placeHolder={'Şifre'}
             autoCapitalize="none"
+            secureTextEntry={true}
           />
-          <CustomButton buttonText={'Giriş Yap'} />
+          <CustomButton buttonText={'Giriş Yap'} onPress={() => onSubmit()} />
           <Text style={styles.loginText}>Henüz hesabın yok mu?</Text>
           <CustomButton
             buttonText={'Hemen kayıt ol, keşfetmeye başla!'}
