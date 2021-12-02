@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {
   SafeAreaView,
   View,
@@ -10,11 +10,14 @@ import {
 } from 'react-native';
 import {CustomInput, CustomButton} from '../components';
 import axios from 'axios';
+import Context from '../context/store';
 
 const Login = props => {
   const [username, setUserName] = useState('');
   const [pass, setPass] = useState('');
   const [loading, setLoading] = useState(false);
+
+  const {dispatch} = useContext(Context);
 
   const onSubmit = async () => {
     await axios
@@ -26,6 +29,7 @@ const Login = props => {
         setLoading(true);
         console.log(res);
         if (res.data.status) {
+          dispatch({type: 'SET_USERNAME', payload: username});
           setTimeout(() => {
             setLoading(false);
           }, 2500);
@@ -77,11 +81,16 @@ const Login = props => {
             autoCapitalize="none"
             secureTextEntry={true}
           />
-          <CustomButton buttonText={'Giriş Yap'} onPress={() => onSubmit()} />
-          <Text style={styles.loginText}>Henüz hesabın yok mu?</Text>
           <CustomButton
-            buttonText={'Hemen kayıt ol, keşfetmeye başla!'}
+            buttonText={'Login'}
+            onPress={() => onSubmit()}
+            icon={require('../assets/login.png')}
+          />
+          <Text style={styles.loginText}>Don't have an account yet?</Text>
+          <CustomButton
+            buttonText={'Register now and start exploring!'}
             onPress={() => props.navigation.navigate('Register')}
+            icon={require('../assets/register.png')}
           />
         </View>
       </View>

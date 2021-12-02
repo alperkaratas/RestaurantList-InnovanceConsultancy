@@ -29,26 +29,26 @@ const Register = props => {
         />
       </View>
       <View style={styles.inputContainer}>
-        <Text style={styles.loginText}>Kaydol ve keşfetmeye başla!</Text>
+        <Text style={styles.loginText}>Register and start exploring!</Text>
         <CustomInput
           value={username}
           onChangeText={setUsername}
           keyboardType={'default'}
-          placeHolder={'Kullanıcı adı'}
+          placeHolder={'Username'}
           secureTextEntry={false}
         />
         <CustomInput
           value={pass}
           onChangeText={setPass}
           keyboardType={'default'}
-          placeHolder={'Şifre'}
+          placeHolder={'Password'}
           secureTextEntry={true}
         />
         <CustomInput
           value={phone}
           onChangeText={setPhone}
           keyboardType={'phone-pad'}
-          placeHolder={'Telefon numarası'}
+          placeHolder={'Phone Number'}
           autoCapitalize="none"
           secureTextEntry={false}
         />
@@ -56,14 +56,19 @@ const Register = props => {
           value={email}
           onChangeText={setEmail}
           keyboardType={'email-address'}
-          placeHolder={'E-posta adresi'}
+          placeHolder={'E-mail'}
           autoCapitalize="none"
           secureTextEntry={false}
         />
-        <CustomButton buttonText={'Kaydol'} onPress={() => submitRegister()} />
         <CustomButton
-          buttonText={'Vazgeç'}
+          buttonText={'Signup'}
+          onPress={() => submitRegister()}
+          icon={require('../assets/register.png')}
+        />
+        <CustomButton
+          buttonText={'Cancel'}
           onPress={() => props.navigation.goBack()}
+          icon={require('../assets/back.png')}
         />
       </View>
     </SafeAreaView>

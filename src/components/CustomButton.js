@@ -1,16 +1,22 @@
 import React from 'react';
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {Image, Text, TouchableOpacity, StyleSheet, View} from 'react-native';
 
 const CustomButton = props => {
   return (
     <TouchableOpacity style={styles.buttonContainer} onPress={props.onPress}>
       <Text style={styles.buttonText}>{props.buttonText}</Text>
+      {props.icon ? (
+        <View style={{marginLeft: 5}}>
+          <Image style={{width: 22, height: 22}} source={props.icon} />
+        </View>
+      ) : null}
     </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
   buttonContainer: {
+    flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
     marginVertical: 35,
