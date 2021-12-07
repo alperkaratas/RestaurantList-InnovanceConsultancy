@@ -20,9 +20,7 @@ const Home = props => {
       .get('https://foodbukka.herokuapp.com/api/v1/auth/logout')
       .then(res => {
         if (res.data.status === 'success') {
-          Alert.alert('Message', 'You have successfully logged out.', [
-            {text: 'OK'},
-          ]);
+          Alert.alert('', 'You have successfully logged out.', [{text: 'OK'}]);
           setTimeout(() => {
             props.navigation.navigate('Login');
           }, 2000);

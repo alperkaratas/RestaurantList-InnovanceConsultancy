@@ -7,6 +7,7 @@ import {
   Image,
   ActivityIndicator,
   Keyboard,
+  Alert,
 } from 'react-native';
 import {CustomInput, CustomButton} from '../components';
 import axios from 'axios';
@@ -20,6 +21,10 @@ const Login = props => {
   const {dispatch} = useContext(Context);
 
   const onSubmit = async () => {
+    Keyboard.dismiss();
+    if (username === '' || pass === '') {
+      Alert.alert('', 'Username or password is incorrect!', [{text: 'OK'}]);
+    }
     await axios
       .post('https://foodbukka.herokuapp.com/api/v1/auth/login', {
         username: username,
@@ -27,9 +32,7 @@ const Login = props => {
       })
       .then(res => {
         setLoading(true);
-        console.log(res);
         if (res.data.status) {
-          Keyboard.dismiss();
           dispatch({type: 'SET_USERNAME', payload: username});
           setTimeout(() => {
             setLoading(false);
@@ -37,6 +40,11 @@ const Login = props => {
           setTimeout(() => {
             props.navigation.navigate('Tabs');
           }, 2510);
+        }
+      })
+      .catch(err => {
+        if (err && username != '' && pass != '') {
+          Alert.alert('', 'Username or password is incorrect!', [{text: 'OK'}]);
         }
       });
   };
@@ -70,7 +78,7 @@ const Login = props => {
             value={username}
             onChangeText={setUserName}
             keyboardType={'default'}
-            placeHolder={'Kullanıcı adı'}
+            placeHolder={'Username'}
             autoCapitalize="none"
             secureTextEntry={false}
           />
@@ -78,7 +86,7 @@ const Login = props => {
             value={pass}
             onChangeText={setPass}
             keyboardType={'default'}
-            placeHolder={'Şifre'}
+            placeHolder={'Password'}
             autoCapitalize="none"
             secureTextEntry={true}
           />
