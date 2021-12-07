@@ -4,10 +4,10 @@ import * as React from 'react';
 import {View, Text, Image} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {Login, Register, Home, RestaurantsList, MenusList} from '../pages';
+import {Login, Register, Home, RestaurantsList} from '../pages';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Provider from '../context/Provider';
-import Context from '../context/store';
+import {RestaurantDetails, MenuList} from '../components';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -58,11 +58,6 @@ function Tabs() {
         component={RestaurantsList}
         options={{headerShown: false}}
       />
-      <Tab.Screen
-        name="Menus"
-        component={MenusList}
-        options={{headerShown: false}}
-      />
     </Tab.Navigator>
   );
 }
@@ -86,9 +81,19 @@ const Router = () => {
             component={Login}
           />
           <Stack.Screen
-            options={{headerShown: false}}
+            options={{headerShown: false, gestureEnabled: false}}
             name="Register"
             component={Register}
+          />
+          <Stack.Screen
+            options={{headerShown: false, gestureEnabled: false}}
+            name="RestaurantDetails"
+            component={RestaurantDetails}
+          />
+          <Stack.Screen
+            options={{headerShown: false, gestureEnabled: false}}
+            name="MenuList"
+            component={MenuList}
           />
           <Stack.Screen
             options={{headerShown: false, gestureEnabled: false}}

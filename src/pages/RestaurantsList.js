@@ -1,5 +1,11 @@
 import React, {useEffect, useState, useCallback} from 'react';
-import {SafeAreaView, View, RefreshControl, Text, FlatList} from 'react-native';
+import {
+  SafeAreaView,
+  View,
+  RefreshControl,
+  Dimensions,
+  FlatList,
+} from 'react-native';
 import axios from 'axios';
 import {RestaurantsCard} from '../components';
 
@@ -31,7 +37,17 @@ const RestaurantsList = props => {
   console.log('restorantlar', restaurants);
 
   const renderRestorantsItem = ({item}) => {
-    return <RestaurantsCard item={item} />;
+    return (
+      <View
+        style={{
+          justifyContent: 'center',
+          alignSelf: 'center',
+          marginTop: 10,
+          width: Dimensions.get('window').width / 2,
+        }}>
+        <RestaurantsCard navigation={props.navigation} item={item} />
+      </View>
+    );
   };
   return (
     <SafeAreaView style={{flex: 1}}>
@@ -46,6 +62,7 @@ const RestaurantsList = props => {
             onRefresh={onRefresh}
           />
         }
+        numColumns={2}
       />
     </SafeAreaView>
   );

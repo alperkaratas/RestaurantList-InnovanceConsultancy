@@ -7,6 +7,7 @@ import {
   Image,
   ActivityIndicator,
   Alert,
+  Keyboard,
 } from 'react-native';
 import {CustomInput, CustomButton} from '../components';
 import axios from 'axios';
@@ -29,6 +30,7 @@ const Login = props => {
         setLoading(true);
         console.log(res);
         if (res.data.status) {
+          Keyboard.dismiss();
           dispatch({type: 'SET_USERNAME', payload: username});
           setTimeout(() => {
             setLoading(false);
