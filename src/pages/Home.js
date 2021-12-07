@@ -1,5 +1,13 @@
-import React, {useState, useEffect, useContext} from 'react';
-import {SafeAreaView, View, Text, Alert, StyleSheet, Image} from 'react-native';
+import React, {useContext} from 'react';
+import {
+  SafeAreaView,
+  View,
+  Text,
+  Alert,
+  StyleSheet,
+  Image,
+  ScrollView,
+} from 'react-native';
 import axios from 'axios';
 import {CustomButton} from '../components';
 import Context from '../context/store';
@@ -23,61 +31,57 @@ const Home = props => {
   };
 
   return (
-    <SafeAreaView>
-      {/* <CustomButton
-        onPress={() => getAllMenus()}
-        buttonText={'Menüleri getir'}
-      />
-      <CustomButton
-        onPress={() => getAllRestaurants()}
-        buttonText={'Restorantları getir'}
-      /> */}
-      <View style={styles.infoTextContainer}>
-        <Text style={styles.infoText}>
-          This project was developed for{' '}
-          <Text style={{color: '#442270', fontSize: 16}}>
-            Innovance Consultancy
+    <SafeAreaView style={{flex: 1}}>
+      <ScrollView style={{flex: 1}}>
+        <View style={styles.infoTextContainer}>
+          <Text style={styles.infoText}>
+            This project was developed for{' '}
+            <Text style={{color: '#442270', fontSize: 16}}>
+              Innovance Consultancy
+            </Text>
+            .
           </Text>
-          .
-        </Text>
-        <Image
-          source={require('../assets/restaurant.png')}
-          style={{width: 200, height: 200, marginTop: 40}}
-        />
-        <View style={{marginTop: 20}}>
-          <Text style={styles.titleText}>Restaurant List App</Text>
+          <Image
+            source={require('../assets/restaurant.png')}
+            style={{width: 200, height: 200, marginTop: 40}}
+          />
+          <View style={{marginTop: 20}}>
+            <Text style={styles.titleText}>Restaurant List App</Text>
+          </View>
+          <View style={{marginTop: 50}}>
+            <Text
+              style={{
+                fontStyle: 'italic',
+                fontSize: 22,
+                fontWeight: 'bold',
+                textDecorationLine: 'underline',
+                color: 'red',
+              }}>
+              Welcome, {state.userName}
+            </Text>
+          </View>
+          <View style={{marginTop: 40, marginHorizontal: 5}}>
+            <Text style={styles.text}>
+              The purpose of this project is to list restaurants and menus and
+              view their details. Developed with Javascript.
+            </Text>
+          </View>
+          <View style={{marginTop: 20, marginHorizontal: 5}}>
+            <Text style={styles.text}>
+              You can list the restaurants in the Restaurants section and click
+              on the restaurant you choose to access its information and menu.
+            </Text>
+          </View>
         </View>
-        <View style={{marginTop: 50}}>
-          <Text
-            style={{
-              fontStyle: 'italic',
-              fontSize: 22,
-              fontWeight: 'bold',
-              textDecorationLine: 'underline',
-              color: 'red',
-            }}>
-            Welcome, {state.userName}
-          </Text>
+
+        <View style={styles.logOutContainer}>
+          <CustomButton
+            onPress={() => logOut()}
+            buttonText={'Logout'}
+            icon={require('../assets/logout.png')}
+          />
         </View>
-        <View style={{marginTop: 40, marginHorizontal: 5}}>
-          <Text style={styles.text}>
-            The purpose of this project is to list restaurants and menus and
-            view their details. Developed with Javascript.
-          </Text>
-        </View>
-        <View style={{marginTop: 20, marginHorizontal: 5}}>
-          <Text style={styles.text}>
-            You can access restaurants and menus from the menu below.
-          </Text>
-        </View>
-      </View>
-      <View style={styles.logOutContainer}>
-        <CustomButton
-          onPress={() => logOut()}
-          buttonText={'Logout'}
-          icon={require('../assets/logout.png')}
-        />
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -106,7 +110,7 @@ const styles = StyleSheet.create({
   logOutContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 30,
+    marginTop: 20,
   },
 });
 
