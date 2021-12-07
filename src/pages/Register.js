@@ -1,5 +1,13 @@
 import React, {useState} from 'react';
-import {SafeAreaView, StyleSheet, View, Text, Image} from 'react-native';
+import {
+  SafeAreaView,
+  StyleSheet,
+  View,
+  Text,
+  Image,
+  Keyboard,
+  Alert,
+} from 'react-native';
 import {CustomButton, CustomInput} from '../components';
 import axios from 'axios';
 
@@ -9,7 +17,13 @@ const Register = props => {
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
 
+  const [loading, setLoading] = useState(false);
+
   const submitRegister = async () => {
+    Keyboard.dismiss();
+    if (username === '' || pass === '' || phone === '' || email === '') {
+      Alert.alert('Error', 'Check the information again!', [{text: 'OK'}]);
+    }
     await axios
       .post('https://foodbukka.herokuapp.com/api/v1/auth/register', {
         username: username,
@@ -17,7 +31,25 @@ const Register = props => {
         phone: phone,
         email: email,
       })
-      .then(res => console.log(res));
+      .then(res => {
+        setLoading(true);
+        if (res.data.status) {
+          setTimeout(() => {
+            setLoading(false);
+          }, 2500);
+          Alert.alert('', 'You have successfully register, you can login!', [
+            {text: 'OK'},
+          ]);
+          setTimeout(() => {
+            props.navigation.navigate('Login');
+          }, 2000);
+        }
+      })
+      .catch(err => {
+        if (err && username != '' && pass != '' && phone != '' && email != '') {
+          Alert.alert('Error', 'Check the information again!', [{text: 'OK'}]);
+        }
+      });
   };
 
   return (
