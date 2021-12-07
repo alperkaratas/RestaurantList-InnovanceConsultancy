@@ -83,16 +83,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginLeft: 5,
     marginTop: 25,
-    //textDecorationLine: 'underline',
     fontFamily: 'HoeflerText-Italic',
   },
   menuDesc: {
     fontSize: 15,
-    //textAlign: 'center',
     marginLeft: 5,
     marginTop: 25,
-    //textDecorationLine: 'underline',
-    //fontFamily: 'HoeflerText-Italic',
   },
   menuImagesContainer: {
     marginTop: 35,

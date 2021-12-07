@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {
   SafeAreaView,
   View,
@@ -6,7 +6,6 @@ import {
   Image,
   Dimensions,
   StyleSheet,
-  TouchableOpacity,
 } from 'react-native';
 import {CustomButton, BackButton} from '../components';
 

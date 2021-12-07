@@ -6,7 +6,6 @@ import {
   StyleSheet,
   Image,
   ActivityIndicator,
-  Alert,
   Keyboard,
 } from 'react-native';
 import {CustomInput, CustomButton} from '../components';

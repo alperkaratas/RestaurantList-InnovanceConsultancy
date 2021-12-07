@@ -34,8 +34,6 @@ const RestaurantsList = props => {
     wait(2000).then(() => setRefreshing(false));
   }, []);
 
-  console.log('restorantlar', restaurants);
-
   const renderRestorantsItem = ({item}) => {
     return (
       <View

@@ -23,8 +23,6 @@ const RestaurantsCard = ({navigation, item}) => {
           borderTopRightRadius: 10,
           height: 120,
           width: Dimensions.get('window').width / 2.11,
-          //marginLeft: 10,
-          //marginTop: 2,
         }}
         source={{uri: item.image}}
       />

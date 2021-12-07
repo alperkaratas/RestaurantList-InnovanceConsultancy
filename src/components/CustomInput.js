@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {View, StyleSheet, TextInput, Dimensions} from 'react-native';
 
 const CustomInput = props => {
